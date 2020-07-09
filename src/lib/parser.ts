@@ -2,7 +2,7 @@
 import {
     Project, Identifier, SourceFile, ts, PropertyAccessExpression
 } from 'ts-morph';
-import { CallExpression, isIdentifier } from 'typescript';
+import { isIdentifier } from 'typescript';
 const project = new Project({
     tsConfigFilePath: '/Projects/Phenix/AccessionRV/tsconfig.json',
 });
