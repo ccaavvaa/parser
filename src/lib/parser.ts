@@ -37,11 +37,14 @@ for (const s of project.getSourceFiles()) {
             const pae = n as PropertyAccessExpression;
             const children = pae.getChildrenOfKind(ts.SyntaxKind.Identifier) as Identifier[];
             for (const c of children) {
+                if (c.compilerNode.text !== 't') {
+                    continue;
+                }
                 const defs = c.getDefinitions();
                 if (!defs.length) {
                     continue;
                 }
-                if (c.compilerNode.text === 't' && c.getDefinitions()[0].getDeclarationNode() === method) {
+                if (defs[0].getDeclarationNode() === method) {
                     cnt++;
                     const callExpr = (n.getParent().compilerNode as any);
                     const arg = (callExpr.arguments[0] as any);
@@ -54,6 +57,7 @@ for (const s of project.getSourceFiles()) {
                 }
             }
         }
+
     });
 }
 console.log(cnt);

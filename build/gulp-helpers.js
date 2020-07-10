@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.logExecOutput = exports.trim = exports.setTaskMeta = void 0;
 const fancyLog = require("fancy-log");
 function setTaskMeta(fn, description, displayName) {
     fn.description = description;

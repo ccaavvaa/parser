@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildCompile = exports.compile = exports.buildLint = exports.lint = exports.buildTsc = exports.tsc = exports.deleteBuildCompileOutput = exports.deleteCompilerOutput = void 0;
 const child_process_1 = require("child_process");
 const del_1 = require("del");
 const fancyLog = require("fancy-log");

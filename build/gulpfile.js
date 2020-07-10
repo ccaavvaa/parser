@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildCompile = exports.test = exports.compile = void 0;
 const gulp = require("gulp");
 const compileTasks = require("./compile");
 const testTasks = require("./test");
