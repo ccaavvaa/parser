@@ -27,9 +27,11 @@
             "type": "node",
             "request": "launch",
             "name": "Lancer le programme",
-            "program": "${workspaceFolder}\\lib\\parser.js",
+            "program": "${workspaceFolder}\\lib\\app.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
+            ],
+            "args": [
             ]
         }
     ]

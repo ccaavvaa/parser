@@ -7,7 +7,7 @@ import { isIdentifier } from 'typescript';
 
 export interface MessagesExtractorOptions {
     tsConfigPath: string;
-    onMessage: (messageInfo: MessageInfo) => void;
+    onMessage: (messageInfo: MessageInfo) => boolean;
 }
 export interface MessageInfo {
     isError?: boolean;
@@ -23,21 +23,27 @@ export class MessagesExtractor {
     constructor(options: MessagesExtractorOptions) {
         this.options = options;
     }
-    public execute(): Promise<void> {
+    public execute() {
         if (!this.options.onMessage) {
             return;
         }
         this.loadProject();
-
+        let stop = false;
         for (const s of this.project.getSourceFiles()) {
             let sourceFilePath: string = null;
             s.forEachDescendant((n) => {
+                if (stop) {
+                    return;
+                }
                 if (!ts.isPropertyAccessExpression(n.compilerNode)) {
                     return;
                 }
                 const pae = n as PropertyAccessExpression;
                 const children = pae.getChildrenOfKind(ts.SyntaxKind.Identifier) as Identifier[];
                 for (const c of children) {
+                    if (stop) {
+                        break;
+                    }
                     if (c.compilerNode.text !== 't') {
                         continue;
                     }
@@ -63,7 +69,7 @@ export class MessagesExtractor {
                     } else {
                         messageInfo.isError = true;
                     }
-                    this.options.onMessage(messageInfo);
+                    stop = !this.options.onMessage(messageInfo);
                 }
             });
         }

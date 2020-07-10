@@ -5,13 +5,14 @@ const me = new MessagesExtractor({
     tsConfigPath: '/Projects/Phenix/AccessionRV/tsconfig.json',
     onMessage: (i) => {
         cnt++;
+        if (cnt % 100 === 0) {
+            console.log(cnt);
+            return false;
+        }
         if (i.isError) {
             console.error(`${i.file}:${i.line}`);
-        } else {
-            if (cnt % 100 === 0) {
-                console.log(cnt);
-            }
         }
+        return true;
     },
 });
 me.execute();

@@ -1,6 +1,6 @@
 export interface MessagesExtractorOptions {
     tsConfigPath: string;
-    onMessage: (messageInfo: MessageInfo) => void;
+    onMessage: (messageInfo: MessageInfo) => boolean;
 }
 export interface MessageInfo {
     isError?: boolean;
@@ -13,6 +13,6 @@ export declare class MessagesExtractor {
     private project;
     private method;
     constructor(options: MessagesExtractorOptions);
-    execute(): Promise<void>;
+    execute(): void;
     private loadProject;
 }
